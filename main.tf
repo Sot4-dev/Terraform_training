@@ -1,11 +1,3 @@
-provider "aws" {
-   region = "ap-northeast-1"
-   profile = "study-user"
-   assume_role {
-     role_arn = "arn:aws:iam::171824085810:role/TerraformExecutionRole"
-   }
-}
-
 data "aws_vpc" "default" {
   default = true
 }
@@ -16,33 +8,7 @@ data "aws_subnets" "default" {
     values = [ data.aws_vpc.default.id ]
   }
 }
-variable "server_port" {
-  description = "HTTPリクエストに使うポート番号"
-  type        = number
-  default     = 8080
-}
 
-variable "alb_port" {
-  description = "ALBのポート"
-  type = number
-  default = 80
-}
-
-variable "ANYWHERE_IPV4_CIDR" {
-  description = "インターネットからのアクセスを許可するための0.0.0.0/0"
-  type = list(string)
-  default = ["0.0.0.0/0"]
-}
-
-output "alb_dns_name" {
-  value       = aws_lb.example.dns_name
-  description = "このサーバー群のロードバランサーのドメイン名"
-}
-
-output "url" {
-  value = "http://${aws_lb.example.dns_name}"
-  description = "このサーバー群のURL"
-}
 resource "aws_launch_template" "example" {
   name_prefix = "example-"
   image_id           = "ami-054400ced365b82a0"
