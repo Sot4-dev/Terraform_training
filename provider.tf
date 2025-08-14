@@ -1,6 +1,6 @@
 provider "aws" {
-   region = "ap-northeast-1"
-   profile = "study-user"
+   region = var.region
+   profile = var.iam_user_name
    assume_role {
      role_arn = var.my_role_arn
    }
