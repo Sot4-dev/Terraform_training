@@ -15,3 +15,9 @@ variable "ANYWHERE_IPV4_CIDR" {
   type = list(string)
   default = ["0.0.0.0/0"]
 }
+
+variable "my_role_arn" {
+  description = "role arn"
+  type = string
+  default = "arn:aws:iam::171824085810:role/TerraformExecutionRole"
+}
